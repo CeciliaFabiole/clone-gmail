@@ -1,23 +1,20 @@
 <script> 
+	import Email from '$lib/Email.svelte'
 
 	let emails = []
-	let users = []
-	export async function load() {
+	
+	export async function getPosts() {
 		const response = await fetch('https://dummyjson.com/posts')
 		const data = await response.json()
 		emails = [...data.posts]
 	}
-	load()
+	getPosts()
 	
 </script>
 
 <div>
 	{#each emails as email}
-	<div class="h-14 flex items-center p-3">
-		<p>{email.title}</p>
-		
-	</div>
-	<hr/>
+		<Email email = {email}/>
 	{/each}
 </div>
 
