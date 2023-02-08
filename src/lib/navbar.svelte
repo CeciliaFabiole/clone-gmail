@@ -5,9 +5,6 @@
 	import HelpCircleOutline from 'svelte-material-icons/HelpCircleOutline.svelte';
 	import CogOutline from 'svelte-material-icons/CogOutline.svelte';
 	import Apps from 'svelte-material-icons/Apps.svelte';
-	import PencilOutline from 'svelte-material-icons/PencilOutline.svelte';
-	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
-	import FileOutline from 'svelte-material-icons/FileOutline.svelte';
 	export let size = '2em';
 	export let width = size;
 	export let height = size;
