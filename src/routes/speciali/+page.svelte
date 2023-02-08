@@ -1,5 +1,4 @@
 <script>
-	let colorhover = '#E7EAED';
 	import Navbar from '$lib/navbar.svelte';
 	import Sidebar from '$lib/sidebar.svelte';
 </script>
@@ -12,6 +11,3 @@
 		<div class="width:1/12" />
 	</div>
 </div>
-
-<style>
-</style>
