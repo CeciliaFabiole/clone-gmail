@@ -5,6 +5,8 @@
 	import HelpCircleOutline from 'svelte-material-icons/HelpCircleOutline.svelte';
 	import CogOutline from 'svelte-material-icons/CogOutline.svelte';
 	import Apps from 'svelte-material-icons/Apps.svelte';
+	import { onDestroy } from 'svelte';
+	import { createSearchStore, searchHandler } from './stores/search';
 	export let size = '2em';
 	export let width = size;
 	export let height = size;
@@ -12,13 +14,19 @@
 	export let viewBox = '0 0 24 24';
 
 	export let data;
-	console.log('datasearch:', data);
+	// console.log('datasearch:', data);
 	console.log('datasearch:', data.emails);
 	const searchProducts = data.emails.map((email) => ({
 		...email,
 		searchTerms: `${email.title} ${email.userId}`
 	}));
-	console.log('searchproduct:', searchProducts);
+	console.log('searchafter:', data.emails);
+	// console.log('searchproduct:', searchProducts);
+	const searchStore = createSearchStore(searchProducts);
+	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+	onDestroy(() => {
+		unsubscribe();
+	});
 </script>
 
 <div class="mb-5 flex items-center">
@@ -33,6 +41,7 @@
 		<input
 			class="absolute h-16 w-1/3 rounded-md bg-[#E9F1FB] p-3 pl-20"
 			placeholder="Cerca nella posta"
+			bind:value={$searchStore.search}
 		/>
 		<div
 			class="relative top-0 left-0 mx-2 flex h-14 w-14 items-center justify-center rounded-full hover:bg-[#E7EAED]"
