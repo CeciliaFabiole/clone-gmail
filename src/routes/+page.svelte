@@ -1,23 +1,16 @@
-<script> 
-	import Email from '$lib/Email.svelte'
-
-	let emails = []
-	
-	export async function getPosts() {
-		const response = await fetch('https://dummyjson.com/posts')
-		const data = await response.json()
-		emails = [...data.posts]
-	}
-	getPosts()
-	
+<script>
+	// @ts-nocheck
+	import Email from '$lib/Email.svelte';
+	export let data = {};
 </script>
 
 <div>
-	{#each emails as email}
-		<Email email = {email}/>
-	{/each}
+	{#if data.emails.length > 0}
+		{#each data.emails as email}
+			<Email {email} />
+		{/each}
+	{/if}
 </div>
-
 
 <style>
 </style>
