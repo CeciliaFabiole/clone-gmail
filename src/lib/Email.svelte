@@ -28,7 +28,7 @@
 	}
 	//put in special
 	let special = false;
-	const handleSpecialEmail = () => {
+	const handleSpecialEmail = (i) => {
 		special = !special;
 		console.log(special);
 		if (special) {
@@ -42,14 +42,9 @@
 			console.log($starred);
 		}
 		if (!special) {
-			$starred = [
-				...$starred,
-				{
-					mittente: `${user.firstName} ${user.lastName}`,
-					oggetto: email.title
-				}
-			];
-			console.log($starred);
+			let newStarred = [...$starred];
+			newStarred.splice(i, 1);
+			$starred = [...newStarred];
 		}
 	};
 </script>
