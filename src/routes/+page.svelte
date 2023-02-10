@@ -7,11 +7,8 @@
 
 	function handleRemove(i) {
 		let newEmailList = [...emails];
-		console.log('newEmails: ', newEmailList);
 		newEmailList.splice(i, 1);
-		console.log('newEmails: ', newEmailList);
 		emails = [...newEmailList];
-		console.log(emails);
 	}
 </script>
 

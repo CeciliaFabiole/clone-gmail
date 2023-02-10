@@ -1,14 +1,10 @@
 <script>
-	import { newEmails } from '$lib/stores/email.js';
+	import { newEmails } from '$lib/stores/newemail.js';
 	import Icon from './Icon.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	let destinatario = '';
 	let oggetto = '';
 	let message = '';
-
-	$: console.log('destinatario: ', destinatario);
-	$: console.log('oggetto: ', oggetto);
-	$: console.log('message: ', message);
 
 	const handleSentEmail = () => {
 		$newEmails = [

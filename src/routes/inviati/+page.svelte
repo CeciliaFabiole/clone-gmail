@@ -1,5 +1,5 @@
 <script>
-	import { newEmails } from '$lib/stores/email';
+	import { newEmails } from '$lib/stores/newemail';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import Icon from '$lib/Icon.svelte';
 

@@ -4,6 +4,7 @@
 	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { starred } from '$lib/stores/newemail.js';
 
 	const dispatch = createEventDispatcher();
 
@@ -25,6 +26,32 @@
 	function remove() {
 		dispatch('delete');
 	}
+	//put in special
+	let special = false;
+	const handleSpecialEmail = () => {
+		special = !special;
+		console.log(special);
+		if (special) {
+			$starred = [
+				...$starred,
+				{
+					mittente: `${user.firstName} ${user.lastName}`,
+					oggetto: email.title
+				}
+			];
+			console.log($starred);
+		}
+		if (!special) {
+			$starred = [
+				...$starred,
+				{
+					mittente: `${user.firstName} ${user.lastName}`,
+					oggetto: email.title
+				}
+			];
+			console.log($starred);
+		}
+	};
 </script>
 
 <div
@@ -38,7 +65,13 @@
 >
 	{#if !active}
 		<div class="flex items-center justify-between p-3">
-			<Icon icon={StarOutline} width="1.5em" />
+			{#if !special}
+				<button on:click={handleSpecialEmail}><Icon icon={StarOutline} width="1.5em" /></button>
+			{:else}
+				<button on:click={handleSpecialEmail}
+					><Icon icon={StarOutline} width="1.5em" color="yellow" /></button
+				>
+			{/if}
 			<div class="flex w-1/3 items-center justify-between">
 				<p>{user.firstName} {user.lastName}</p>
 			</div>
@@ -54,7 +87,13 @@
 		<div
 			class="flex h-16 border-spacing-1 cursor-pointer items-center justify-between border border-solid border-gray-400 p-3 shadow-lg"
 		>
-			<Icon icon={StarOutline} width="1.5em" />
+			{#if !special}
+				<button on:click={handleSpecialEmail}><Icon icon={StarOutline} width="1.5em" /></button>
+			{:else}
+				<button on:click={handleSpecialEmail}
+					><Icon icon={StarOutline} width="1.5em" color="yellow" /></button
+				>
+			{/if}
 			<div class="flex w-1/3 items-center justify-between">
 				<p>{user.firstName} {user.lastName}</p>
 			</div>
