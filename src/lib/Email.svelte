@@ -4,20 +4,13 @@
 	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { starred } from '$lib/stores/newemail.js';
+	// import { starred } from '$lib/stores/newemail.js';
 
 	const dispatch = createEventDispatcher();
 
 	//put the data in the div
 	export let email = {};
-	let id = email.userId;
-	let user = {};
-	export async function getUsers() {
-		const response = await fetch(`https://dummyjson.com/users/${id}`);
-		const obj = await response.json();
-		user = obj;
-	}
-	getUsers();
+	console.log('email :', email);
 
 	//on hover show the trash
 	let active = false;
@@ -28,25 +21,9 @@
 	}
 	//put in special
 	let special = false;
-	const handleSpecialEmail = (i) => {
+	function handleSpecialEmail() {
 		special = !special;
-		console.log(special);
-		if (special) {
-			$starred = [
-				...$starred,
-				{
-					mittente: `${user.firstName} ${user.lastName}`,
-					oggetto: email.title
-				}
-			];
-			console.log($starred);
-		}
-		if (!special) {
-			let newStarred = [...$starred];
-			newStarred.splice(i, 1);
-			$starred = [...newStarred];
-		}
-	};
+	}
 </script>
 
 <div
@@ -68,7 +45,7 @@
 				>
 			{/if}
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{user.firstName} {user.lastName}</p>
+				<p>{email.firstname} {email.lastname}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-between">
 				<p>{email.title}</p>
@@ -90,7 +67,7 @@
 				>
 			{/if}
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{user.firstName} {user.lastName}</p>
+				<p>{email.firstname} {email.lastname}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-between">
 				<p>{email.title}</p>

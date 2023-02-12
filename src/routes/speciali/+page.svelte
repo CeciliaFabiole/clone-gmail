@@ -2,20 +2,28 @@
 	import { starred } from '$lib/stores/newemail.js';
 
 	$starred;
+	let special = false;
+	const handleSpecialEmail = (id) => {
+		special = !special;
+		console.log(special);
+		if (special) {
+			$starred = [
+				...$starred,
+				{
+					id: email.id,
+					mittente: `${user.firstName} ${user.lastName}`,
+					oggetto: email.title
+				}
+			];
+			console.log($starred);
+		}
+		if (!special) {
+			$starred.filter((star) => star.id != id);
+		}
+	};
 </script>
 
 {#each $starred as star}
-	<div class="flex h-14 items-center justify-between p-3">
-		<div class="flex w-1/3 items-center justify-between p-3">
-			<p>{star.mittente}</p>
-		</div>
-		<div class="flex w-1/3 items-center justify-between p-3">
-			<p>{star.oggetto}</p>
-		</div>
-		<div class="flex w-1/3 items-center justify-end p-3">
-			<p>data and time</p>
-		</div>
-		<p />
-	</div>
+	<Email />
 	<hr />
 {/each}
