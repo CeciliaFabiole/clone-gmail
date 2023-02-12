@@ -20,10 +20,6 @@
 		dispatch('delete');
 	}
 	//put in special
-	let special = false;
-	function handleSpecialEmail() {
-		special = !special;
-	}
 </script>
 
 <div
