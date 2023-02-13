@@ -3,6 +3,7 @@
 	import Navbar from '$lib/Navbar.svelte';
 	import Sidebar from '$lib/Sidebar.svelte';
 	import NewMail from '$lib/NewMail.svelte';
+	import LittleSidebar from '$lib/LittleSidebar.svelte';
 
 	export let data = {};
 
@@ -13,13 +14,23 @@
 	function handleHide() {
 		show = false;
 	}
+	let showSidebar = false;
+	function handleSidebar() {
+		showSidebar = !showSidebar;
+		console.log(showSidebar);
+	}
 </script>
 
 <div class="h-screen bg-[#F5F8FC] p-4">
-	<Navbar {data} />
+	<Navbar {data} on:click={handleSidebar} />
 	<div class="flex h-5/6 w-full">
-		<Sidebar on:click={handleShow} />
-		<div class="relative w-10/12 overflow-y-auto rounded-md bg-[#FFFFFF]">
+		{#if showSidebar}
+			<Sidebar on:click={handleShow} />
+		{:else}
+			<LittleSidebar on:click={handleShow} />
+		{/if}
+
+		<div class="relative w-full overflow-y-auto rounded-md bg-[#FFFFFF]">
 			<slot />
 		</div>
 		{#if show}

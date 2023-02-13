@@ -30,7 +30,7 @@
 </script>
 
 <div
-	class="cursor-pointer"
+	class="cursor-pointer sm:text-xs lg:text-lg"
 	on:mouseenter={() => {
 		active = true;
 	}}

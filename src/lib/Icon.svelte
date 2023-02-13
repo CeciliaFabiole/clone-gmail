@@ -2,7 +2,7 @@
 	// @ts-nocheck
 
 	export let icon;
-	export let size = '2em';
+	export let size = '1.5em';
 	export let width = size;
 	export let height = size;
 	export let color = '#5f6367';
