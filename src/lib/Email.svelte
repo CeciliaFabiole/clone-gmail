@@ -9,7 +9,7 @@
 
 	//put the data in the div
 	export let email = {};
-	console.log('email :', email);
+	// console.log('email :', email);
 
 	//on hover show the trash
 	let active = false;
@@ -19,10 +19,13 @@
 		dispatch('delete');
 	}
 	//put in special
-	export let special;
-	console.log(special);
+	export let special = false;
+	$: console.log(special);
 	function putStar() {
-		dispatch('special');
+		special = !special;
+		dispatch('special', {
+			special: special
+		});
 	}
 </script>
 

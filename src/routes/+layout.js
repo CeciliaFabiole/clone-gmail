@@ -1,7 +1,6 @@
 // @ts-nocheck
-
+let emailList = [];
 export async function load({ fetch }) {
-	let emailList = [];
 	const responsePost = await fetch('https://dummyjson.com/posts');
 	const dataPost = await responsePost.json();
 	const emails = dataPost.posts;
@@ -10,6 +9,16 @@ export async function load({ fetch }) {
 		const responseUser = await fetch(`https://dummyjson.com/users/${post.userId}`);
 		const user = await responseUser.json();
 		// console.log('user:', user);
+		// emailList = [
+		// 	...emailList,
+		// 	{
+		// 		id: post.userId,
+		// 		firstname: user.firstName,
+		// 		lastname: user.lastName,
+		// 		title: post.title,
+		// 		message: post.body
+		// 	}
+		// ];
 		emailList.push({
 			id: post.userId,
 			firstname: user.firstName,

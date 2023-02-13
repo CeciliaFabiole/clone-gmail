@@ -10,7 +10,7 @@
 	import Icon from './Icon.svelte';
 	// import { createSearchStore } from './stores/search';
 
-	export let data = {};
+	// export let data = {};
 	// export let emails = data.emails;
 	// console.log(data);
 	// console.log(emails);
