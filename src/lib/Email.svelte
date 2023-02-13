@@ -20,7 +20,7 @@
 	}
 	//put in special
 	export let special = false;
-	$: console.log(special);
+	// $: console.log(special);
 	function putStar() {
 		special = !special;
 		dispatch('special', {
