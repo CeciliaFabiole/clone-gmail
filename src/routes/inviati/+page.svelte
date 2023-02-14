@@ -1,9 +1,11 @@
 <script>
-	import { newEmails } from '$lib/stores/newemail';
+	import { newEmails } from '$lib/stores/content.js';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import Icon from '$lib/Icon.svelte';
+	// import { destinatario, oggetto } from '$lib/stores/content.js';
 
 	$newEmails;
+	console.log('newEmails', $newEmails);
 </script>
 
 {#each $newEmails as { destinatario, oggetto }}

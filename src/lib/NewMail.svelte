@@ -1,5 +1,7 @@
 <script>
-	import { newEmails } from '$lib/stores/newemail.js';
+	// @ts-nocheck
+
+	import { newEmails } from '$lib/stores/content.js';
 	import Icon from './Icon.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	let destinatario = '';
@@ -18,6 +20,8 @@
 		destinatario = '';
 		oggetto = '';
 		message = '';
+
+		localStorage.setItem('newEmail', JSON.stringify($newEmails));
 	};
 </script>
 

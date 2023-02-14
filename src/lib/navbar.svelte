@@ -17,15 +17,11 @@
 		...email,
 		searchTerms: `${email.title} ${email.id} ${email.firstname} ${email.lastname}`
 	}));
-	const searchStore = createSearchStore(searchPosts);
+	export const searchStore = createSearchStore(searchPosts);
 	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 	onDestroy(() => {
 		unsubscribe();
 	});
-	let visible = false;
-	function handleVisible() {
-		visible = !visible;
-	}
 </script>
 
 <div class="mb-5 flex items-center justify-between">
@@ -40,11 +36,10 @@
 	</div>
 	<div class="flex h-16 items-center sm:w-2/4">
 		<input
-			class="absolute h-12 rounded-md bg-[#E9F1FB] p-3 sm:w-2/4 md:pl-10 lg:pl-16"
+			class="absolute h-12 rounded-md bg-[#E9F1FB] p-3 sm:w-2/4 sm:pl-10 lg:pl-16"
 			placeholder="Cerca nella posta"
 			type="search"
 			bind:value={$searchStore.search}
-			on:click={handleVisible}
 		/>
 
 		<div
@@ -53,16 +48,9 @@
 			<Icon icon={Magnify} />
 		</div>
 	</div>
-	<!-- {#if visible}
-			<div class="absolute z-40 h-96 w-1/3 overflow-y-scroll rounded-lg bg-white p-5">
-				{#each $searchStore.filtered as email}
-					<div>
-						<h2>{email.firstname} {email.lastname}</h2>
-						<p>{email.title}</p>
-					</div>
-				{/each}
-			</div>
-		{/if} -->
+	<!-- <div class="absolute z-40 h-96 w-1/3 overflow-y-scroll rounded-lg bg-white p-5">
+		
+	</div> -->
 
 	<div class="flex items-center justify-end sm:w-1/4">
 		<div

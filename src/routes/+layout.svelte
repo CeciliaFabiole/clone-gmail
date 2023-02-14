@@ -17,7 +17,7 @@
 	let showSidebar = false;
 	function handleSidebar() {
 		showSidebar = !showSidebar;
-		console.log(showSidebar);
+		// console.log(showSidebar);
 	}
 </script>
 
