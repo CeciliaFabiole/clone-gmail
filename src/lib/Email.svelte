@@ -4,7 +4,6 @@
 	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { createSearchStore } from './stores/search';
 
 	const dispatch = createEventDispatcher();
 
@@ -46,18 +45,16 @@
 			{:else}
 				<button on:click={putStar}><Icon icon={StarOutline} width="1.5em" color="yellow" /></button>
 			{/if}
-			{#each $searchStore.filtered as email}
-				<div class="flex w-1/3 items-center justify-between">
-					<p>{email.firstname} {email.lastname}</p>
-				</div>
-				<div class="flex w-1/3 items-center justify-between">
-					<p>{email.title}</p>
-				</div>
-				<div class="flex w-1/3 items-center justify-end">
-					<p>data and time</p>
-				</div>
-				<p />
-			{/each}
+			<div class="flex w-1/3 items-center justify-between">
+				<p>{email.firstname} {email.lastname}</p>
+			</div>
+			<div class="flex w-1/3 items-center justify-between">
+				<p>{email.title}</p>
+			</div>
+			<div class="flex w-1/3 items-center justify-end">
+				<p>data and time</p>
+			</div>
+			<p />
 		</div>
 	{:else}
 		<div

@@ -2,6 +2,10 @@
 	import PencilOutline from 'svelte-material-icons/PencilOutline.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import FileOutline from 'svelte-material-icons/FileOutline.svelte';
+	import SquareOutline from 'svelte-material-icons/SquareOutline.svelte';
+	import ArrowRightThick from 'svelte-material-icons/ArrowRightThick.svelte';
+	import DeleteVariant from 'svelte-material-icons/DeleteVariant.svelte';
+	import TicketOutline from 'svelte-material-icons/TicketOutline.svelte';
 	import Icon from './Icon.svelte';
 </script>
 
@@ -15,7 +19,7 @@
 
 	<div class="mt-10 leading-10">
 		<div class="flex items-center gap-5 rounded-full px-2 hover:bg-[#D3E2FD]">
-			<Icon classes="relative top-0 left-0" color="black" icon={StarOutline} width="1.5em" />
+			<Icon classes="relative top-0 left-0" color="black" icon={SquareOutline} width="1.5em" />
 
 			<p><a href="/">Posta in arrivo</a></p>
 		</div>
@@ -26,12 +30,12 @@
 			<p><a href="/speciali">Speciali</a></p>
 		</div>
 		<div class="flex h-10 w-10/12 items-center gap-5 rounded-full px-2 hover:bg-[#D3E2FD]">
-			<Icon classes="relative top-0 left-0" color="black" icon={StarOutline} width="1.5em" />
+			<Icon classes="relative top-0 left-0" color="black" icon={TicketOutline} width="1.5em" />
 
 			<p><a href="">Importanti</a></p>
 		</div>
 		<div class="flex h-10 w-10/12 items-center gap-5 rounded-full px-2 hover:bg-[#D3E2FD]">
-			<Icon classes="relative top-0 left-0" color="black" icon={StarOutline} width="1.5em" />
+			<Icon classes="relative top-0 left-0" color="black" icon={ArrowRightThick} width="1.5em" />
 
 			<p><a href="/inviati">Inviati</a></p>
 		</div>
@@ -41,7 +45,7 @@
 			<p><a href="">Bozze</a></p>
 		</div>
 		<div class="flex h-10 w-10/12 items-center gap-5 rounded-full px-2  hover:bg-[#D3E2FD]">
-			<Icon classes="relative top-0 left-0" color="black" icon={StarOutline} width="1.5em" />
+			<Icon classes="relative top-0 left-0" color="black" icon={DeleteVariant} width="1.5em" />
 			<p><a href="">Cestino</a></p>
 		</div>
 	</div>

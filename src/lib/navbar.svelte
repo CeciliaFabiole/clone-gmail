@@ -17,7 +17,7 @@
 		...email,
 		searchTerms: `${email.title} ${email.id} ${email.firstname} ${email.lastname}`
 	}));
-	export const searchStore = createSearchStore(searchPosts);
+	const searchStore = createSearchStore(searchPosts);
 	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 	onDestroy(() => {
 		unsubscribe();
@@ -49,7 +49,12 @@
 		</div>
 	</div>
 	<!-- <div class="absolute z-40 h-96 w-1/3 overflow-y-scroll rounded-lg bg-white p-5">
-		
+		{#each $searchStore.filtered as email}
+			<div>
+				<h2>{email.firstname} {email.lastname}</h2>
+				<p>{email.title}</p>
+			</div>
+		{/each}
 	</div> -->
 
 	<div class="flex items-center justify-end sm:w-1/4">
