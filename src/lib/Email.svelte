@@ -4,13 +4,20 @@
 	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import dayjs from 'dayjs';
+	// import customParseFormat from 'dayjs/plugin/customParseFormat';
+	// dayjs.extend(customParseFormat);
 
 	const dispatch = createEventDispatcher();
 
 	//put the data in the div
 	export let email = {};
+	let date = email.date;
+	// console.log('date', date);
 	// console.log('email :', email);
-
+	let now = dayjs(`${date} 1:30 PM`).format('MMM DD, YYYY hh:mm A');
+	// let d3 = dayjs(new Date(date));
+	// console.log('now', now);
 	//on hover show the trash
 	let active = false;
 
@@ -52,7 +59,7 @@
 				<p>{email.title}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-end">
-				<p>data and time</p>
+				<p>{now}</p>
 			</div>
 			<p />
 		</div>

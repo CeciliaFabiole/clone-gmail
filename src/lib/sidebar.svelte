@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="mt-10 leading-10">
-		<div class="flex items-center gap-5 rounded-full px-2 hover:bg-[#D3E2FD]">
+		<div class="flex h-10 w-10/12 items-center gap-5 rounded-full px-2 hover:bg-[#D3E2FD]">
 			<Icon classes="relative top-0 left-0" color="black" icon={SquareOutline} width="1.5em" />
 
 			<p><a href="/">Posta in arrivo</a></p>

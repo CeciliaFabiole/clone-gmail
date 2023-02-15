@@ -4,6 +4,7 @@
 	import { newEmails } from '$lib/stores/content.js';
 	import Icon from './Icon.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
+	import { browser } from '$app/environment';
 	let destinatario = '';
 	let oggetto = '';
 	let message = '';
@@ -21,7 +22,7 @@
 		oggetto = '';
 		message = '';
 
-		localStorage.setItem('newEmail', JSON.stringify($newEmails));
+		browser && localStorage.setItem('newEmail', JSON.stringify($newEmails));
 	};
 </script>
 

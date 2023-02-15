@@ -12,7 +12,7 @@
 
 	export let data = {};
 	export let emails = data.emailList;
-	console.log('searchemails', emails);
+	// console.log('searchemails', emails);
 	const searchPosts = emails.map((email) => ({
 		...email,
 		searchTerms: `${email.title} ${email.id} ${email.firstname} ${email.lastname}`

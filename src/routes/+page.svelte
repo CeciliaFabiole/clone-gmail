@@ -2,45 +2,42 @@
 	// @ts-nocheck
 	import Email from '$lib/Email.svelte';
 	import { starred } from '$lib/stores/content.js';
+	import { emails } from '$lib/stores/email.js';
 
 	export let data = {};
-	export let emails = data.emailList;
-	console.log('emailsimport:', emails);
-	console.log('starred', $starred);
-	function handleRemove(i) {
-		let newEmailList = [...emails];
-		newEmailList.splice(i, 1);
-		emails = [...newEmailList];
+	// console.log('data', data);
+	$emails = [...data.emailList];
+	// console.log('emailsimport:', $emails);
+	// console.log('starred', $starred);
+
+	function handleRemove(id) {
+		$starred = $starred.filter((item) => item.id !== id);
+		$emails = $emails.filter((item) => item.id !== id);
 	}
 
-	function handleSpecialEmail(e, i) {
-		console.log('event', e);
+	function handleSpecialEmail(e, id, email) {
+		// console.log('event', e);
 		let special = e.detail.special;
-		console.log('special', special);
+		// console.log('special', special);
 		if (special) {
-			$starred = [...$starred, emails[i]];
-			console.log('starred1', $starred);
+			$starred = [...$starred, email];
+			// console.log('starred1', $starred);
 		} else {
-			let newStarred = [...$starred];
-			newStarred.splice(i, 1);
-			$starred = [...newStarred];
+			$starred = $starred.filter((item) => item.id !== id);
 		}
 	}
 	// $: console.log($starred.find((item) => item.id === 1) !== undefined);
 </script>
 
 <div>
-	{#if emails.length > 0}
-		{#each emails as email, i}
+	{#if $emails.length > 0}
+		{#each $emails as email}
 			<Email
 				{email}
-				on:delete={() => handleRemove(i)}
-				on:special={(e) => handleSpecialEmail(e, i)}
+				on:delete={() => handleRemove(email.id)}
+				on:special={(e) => handleSpecialEmail(e, email.id, email)}
 				special={$starred.find((item) => item.id === email.id) !== undefined}
 			/>
 		{/each}
 	{/if}
 </div>
-
-<style>
-</style>

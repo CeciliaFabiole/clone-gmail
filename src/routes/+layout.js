@@ -5,6 +5,7 @@ export async function load({ fetch }) {
 	const responsePost = await fetch('https://dummyjson.com/posts');
 	const dataPost = await responsePost.json();
 	const emails = dataPost.posts;
+	console.log(responsePost.status);
 	// console.log('emails', dataPost.posts);
 	const mappedEmails = emails.map(async (post) => {
 		const responseUser = await fetch(`https://dummyjson.com/users/${post.userId}`);
@@ -18,7 +19,8 @@ export async function load({ fetch }) {
 				firstname: user.firstName,
 				lastname: user.lastName,
 				title: post.title,
-				message: post.body
+				message: post.body,
+				date: user.birthDate
 			}
 		];
 		// console.log('data:', emailList);
