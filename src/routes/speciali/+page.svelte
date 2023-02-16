@@ -3,22 +3,22 @@
 
 	import { starred } from '$lib/stores/content.js';
 	import Email from '$lib/Email.svelte';
-	import { browser } from '$app/environment';
+	// import { browser } from '$app/environment';
 	import { emails } from '$lib/stores/email.js';
 	// console.log('starred in special', $starred);
 
 	function handleRemove(id) {
-		$starred = $starred.filter((item) => item.id !== id);
 		$emails = $emails.filter((item) => item.id !== id);
+		$starred = $starred.filter((item) => item.id !== id);
+		localStorage.setItem('newSpecial', JSON.stringify($starred));
+		localStorage.setItem('Emails', JSON.stringify($emails));
 	}
-	function handleSpecialEmail(e, id) {
-		let special = e.detail.special;
+	function handleSpecialEmail(special, id) {
 		if (!special) {
 			$starred = $starred.filter((item) => item.id !== id);
+			localStorage.setItem('newSpecial', JSON.stringify($starred));
 		}
 	}
-
-	browser && localStorage.setItem('newSpecial', JSON.stringify($starred));
 
 	let moving = false;
 	const drop = (e, target) => {
@@ -61,7 +61,7 @@
 		<Email
 			{email}
 			on:delete={() => handleRemove(email.id)}
-			on:special={(e) => handleSpecialEmail(e, email.id, email)}
+			on:special={({ detail }) => handleSpecialEmail(detail.special, detail.id)}
 			special={true}
 		/>
 		<hr />

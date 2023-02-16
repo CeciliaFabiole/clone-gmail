@@ -9,7 +9,7 @@ if (!stored) {
 	browser && localStorage.setItem('newEmail', JSON.stringify([]));
 }
 console.log('stored', stored);
-if (stored.length > 0) {
+if (stored !== null && stored.length > 0) {
 	const parsedStored = JSON.parse(stored);
 	// console.log('parsedStored', parsedStored);
 	newEmails.set(parsedStored);
@@ -22,7 +22,7 @@ if (!starStored) {
 	browser && localStorage.setItem('newSpecial', JSON.stringify([]));
 }
 // console.log('starStored', starStored);
-if (stored.length > 0) {
+if (starStored !== null && starStored.length > 0) {
 	const parsedStar = JSON.parse(starStored);
 	// console.log('parsedStored', parsedStar);
 	starred.set(parsedStar);

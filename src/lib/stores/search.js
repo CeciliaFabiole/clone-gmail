@@ -1,21 +1,6 @@
 // @ts-nocheck
-import { writable } from 'svelte/store';
 
-export const createSearchStore = (data) => {
-	const { subscribe, set, update } = writable({
-		data: data,
-		filtered: data,
-		search: ''
-	});
-	return {
-		subscribe,
-		set,
-		update
-	};
-};
-export const searchHandler = (store) => {
-	const searchTerm = store.search.toLowerCase() || '';
-	store.filtered = store.data.filter((item) => {
-		return item.searchTerms.toLowerCase().includes(searchTerm);
-	});
+export const searchHandler = (search, data) => {
+	const searchTerm = search.toLowerCase() || '';
+	return data.filter((item) => item.searchTerms.toLowerCase().includes(searchTerm));
 };

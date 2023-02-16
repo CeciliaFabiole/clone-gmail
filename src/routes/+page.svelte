@@ -3,21 +3,23 @@
 	import Email from '$lib/Email.svelte';
 	import { starred } from '$lib/stores/content.js';
 	import { emails } from '$lib/stores/email.js';
+	import { getContext, onMount } from 'svelte';
 
-	export let data = {};
+	console.log('emailsimport:', $emails);
+
 	// console.log('data', data);
-	$emails = [...data.emailList];
-	// console.log('emailsimport:', $emails);
+
 	// console.log('starred', $starred);
 
 	function handleRemove(id) {
 		$starred = $starred.filter((item) => item.id !== id);
 		$emails = $emails.filter((item) => item.id !== id);
+		localStorage.setItem('newSpecial', JSON.stringify($starred));
+		localStorage.setItem('Emails', JSON.stringify($emails));
 	}
 
-	function handleSpecialEmail(e, id, email) {
+	function handleSpecialEmail(special, id, email) {
 		// console.log('event', e);
-		let special = e.detail.special;
 		// console.log('special', special);
 		if (special) {
 			$starred = [...$starred, email];
@@ -25,17 +27,20 @@
 		} else {
 			$starred = $starred.filter((item) => item.id !== id);
 		}
+		localStorage.setItem('newSpecial', JSON.stringify($starred));
 	}
+
+	const { filtered } = getContext('search');
 	// $: console.log($starred.find((item) => item.id === 1) !== undefined);
 </script>
 
 <div>
 	{#if $emails.length > 0}
-		{#each $emails as email}
+		{#each $filtered as email}
 			<Email
 				{email}
 				on:delete={() => handleRemove(email.id)}
-				on:special={(e) => handleSpecialEmail(e, email.id, email)}
+				on:special={({ detail }) => handleSpecialEmail(detail.special, detail.id, email)}
 				special={$starred.find((item) => item.id === email.id) !== undefined}
 			/>
 		{/each}

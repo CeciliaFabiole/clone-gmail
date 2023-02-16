@@ -7,21 +7,21 @@
 	import CogOutline from 'svelte-material-icons/CogOutline.svelte';
 	import Apps from 'svelte-material-icons/Apps.svelte';
 	import Icon from './Icon.svelte';
-	import { createSearchStore, searchHandler } from './stores/search';
-	import { onDestroy } from 'svelte';
+	import { searchHandler } from './stores/search';
+	import { getContext } from 'svelte';
+	import { emails } from './stores/email';
 
-	export let data = {};
-	export let emails = data.emailList;
+	const { data: data1, filtered, search } = getContext('search');
 	// console.log('searchemails', emails);
-	const searchPosts = emails.map((email) => ({
-		...email,
-		searchTerms: `${email.title} ${email.id} ${email.firstname} ${email.lastname}`
-	}));
-	const searchStore = createSearchStore(searchPosts);
-	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
-	onDestroy(() => {
-		unsubscribe();
-	});
+
+	$: {
+		const searchPosts = $emails.map((email) => ({
+			...email,
+			searchTerms: `${email.title} ${email.id} ${email.firstname} ${email.lastname}`
+		}));
+		$data1 = searchPosts;
+		$filtered = searchHandler($search, $data1);
+	}
 </script>
 
 <div class="mb-5 flex items-center justify-between">
@@ -39,7 +39,7 @@
 			class="absolute h-12 rounded-md bg-[#E9F1FB] p-3 sm:w-2/4 sm:pl-10 lg:pl-16"
 			placeholder="Cerca nella posta"
 			type="search"
-			bind:value={$searchStore.search}
+			bind:value={$search}
 		/>
 
 		<div
@@ -48,14 +48,6 @@
 			<Icon icon={Magnify} />
 		</div>
 	</div>
-	<!-- <div class="absolute z-40 h-96 w-1/3 overflow-y-scroll rounded-lg bg-white p-5">
-		{#each $searchStore.filtered as email}
-			<div>
-				<h2>{email.firstname} {email.lastname}</h2>
-				<p>{email.title}</p>
-			</div>
-		{/each}
-	</div> -->
 
 	<div class="flex items-center justify-end sm:w-1/4">
 		<div

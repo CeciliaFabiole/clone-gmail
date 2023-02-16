@@ -5,6 +5,7 @@
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import dayjs from 'dayjs';
+
 	// import customParseFormat from 'dayjs/plugin/customParseFormat';
 	// dayjs.extend(customParseFormat);
 
@@ -13,11 +14,7 @@
 	//put the data in the div
 	export let email = {};
 	let date = email.date;
-	// console.log('date', date);
-	// console.log('email :', email);
 	let now = dayjs(`${date} 1:30 PM`).format('MMM DD, YYYY hh:mm A');
-	// let d3 = dayjs(new Date(date));
-	// console.log('now', now);
 	//on hover show the trash
 	let active = false;
 
@@ -27,11 +24,11 @@
 	}
 	//put in special
 	export let special = false;
-	// $: console.log(special);
 	function putStar() {
 		special = !special;
 		dispatch('special', {
-			special: special
+			special: special,
+			id: email.id
 		});
 	}
 </script>
