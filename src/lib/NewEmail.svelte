@@ -1,34 +1,30 @@
 <script>
 	// @ts-nocheck
-	import Icon from './Icon.svelte';
-	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
+
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
-	import { createEventDispatcher } from 'svelte';
+	import Icon from '$lib/Icon.svelte';
 	import dayjs from 'dayjs';
-
-	// import customParseFormat from 'dayjs/plugin/customParseFormat';
-	// dayjs.extend(customParseFormat);
-
+	import TrashCanOutline from 'svelte-material-icons/TrashCanOutline.svelte';
+	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	//put the data in the div
-	export let email = {};
-	let date = email.date;
-	let now = dayjs(`${date} 1:30 PM`).format('MMM DD, YYYY hh:mm A');
-	//on hover show the trash
+	export let newEmail = {};
+	console.log('newEmail', newEmail);
+	let now = dayjs(new Date()).format('MMM DD, YYYY hh:mm A');
 	let active = false;
 
 	//delete an element
 	function remove() {
 		dispatch('delete');
 	}
+
 	//put in special
 	export let special = false;
 	function putStar() {
 		special = !special;
 		dispatch('special', {
 			special: special,
-			id: email.id
+			id: newEmail.id
 		});
 	}
 </script>
@@ -49,11 +45,12 @@
 			{:else}
 				<button on:click={putStar}><Icon icon={StarOutline} width="1.5em" color="yellow" /></button>
 			{/if}
+
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{email.firstname} {email.lastname}</p>
+				<p>{newEmail.destinatario}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{email.title}</p>
+				<p>{newEmail.oggetto}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-end">
 				<p>{now}</p>
@@ -69,11 +66,12 @@
 			{:else}
 				<button on:click={putStar}><Icon icon={StarOutline} width="1.5em" color="yellow" /></button>
 			{/if}
+
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{email.firstname} {email.lastname}</p>
+				<p>{newEmail.destinatario}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-between">
-				<p>{email.title}</p>
+				<p>{newEmail.oggetto}</p>
 			</div>
 			<div class="flex w-1/3 items-center justify-end">
 				<button on:click={remove}><Icon icon={TrashCanOutline} /></button>
@@ -81,4 +79,7 @@
 		</div>
 	{/if}
 </div>
+
 <hr />
+
+			

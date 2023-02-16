@@ -3,12 +3,9 @@
 	import Email from '$lib/Email.svelte';
 	import { starred } from '$lib/stores/content.js';
 	import { emails } from '$lib/stores/email.js';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 
-	console.log('emailsimport:', $emails);
-
-	// console.log('data', data);
-
+	// console.log('emailsimport:', $emails);
 	// console.log('starred', $starred);
 
 	function handleRemove(id) {

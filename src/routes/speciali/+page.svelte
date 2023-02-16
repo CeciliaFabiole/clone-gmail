@@ -5,6 +5,7 @@
 	import Email from '$lib/Email.svelte';
 	// import { browser } from '$app/environment';
 	import { emails } from '$lib/stores/email.js';
+	import NewEmail from '$lib/NewEmail.svelte';
 	// console.log('starred in special', $starred);
 
 	function handleRemove(id) {
@@ -67,3 +68,20 @@
 		<hr />
 	</div>
 {/each}
+<!-- {#each $starred as newEmail, i}
+	<div
+		draggable={true}
+		on:dragstart={(e) => dragstart(e, i)}
+		on:drop|preventDefault={(e) => drop(e, i)}
+		ondragover="return false"
+		on:dragenter={() => moving === i}
+	>
+		<NewEmail
+			{newEmail}
+			on:delete={() => handleRemove(newEmail.id)}
+			on:special={({ detail }) => handleSpecialEmail(detail.special, detail.id)}
+			special={true}
+		/>
+		<hr />
+	</div>
+{/each} -->

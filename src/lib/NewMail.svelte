@@ -13,6 +13,7 @@
 		$newEmails = [
 			...$newEmails,
 			{
+				id: Math.round(Math.random() * 100),
 				destinatario: destinatario,
 				oggetto: oggetto,
 				message: message
@@ -26,7 +27,10 @@
 	};
 </script>
 
-<div class="absolute bottom-0 right-9 rounded-t-xl bg-white shadow-2xl md:w-3/4 lg:w-2/4">
+<form
+	class="absolute bottom-0 right-9 rounded-t-xl bg-white shadow-2xl md:w-3/4 lg:w-2/4"
+	on:submit|preventDefault={handleSentEmail}
+>
 	<div class="flex items-center justify-between rounded-t-xl bg-[#F2F6FB] p-5">
 		<p>Nuovo messaggio</p>
 		<button on:click><Icon icon={Close} /></button>
@@ -40,7 +44,5 @@
 	</div>
 	<hr />
 	<textarea class="h-40 w-full p-5 outline-0" bind:value={message} />
-	<button type="submit" class="m-5 h-10 w-1/5 rounded-full bg-[#1C73E8]" on:click={handleSentEmail}
-		>Invia</button
-	>
-</div>
+	<button type="submit" class="m-5 h-10 w-1/5 rounded-full bg-[#1C73E8]">Invia</button>
+</form>
