@@ -8,7 +8,15 @@
 	let destinatario = '';
 	let oggetto = '';
 	let message = '';
+	let files;
 
+	$: if (files) {
+		console.log('files', files);
+		for (const file of files) {
+			console.log('file', file);
+			console.log('name', `${file.name} : ${file.size} bytes`);
+		}
+	}
 	const handleSentEmail = () => {
 		$newEmails = [
 			...$newEmails,
@@ -16,12 +24,14 @@
 				id: Math.round(Math.random() * 100),
 				destinatario: destinatario,
 				oggetto: oggetto,
-				message: message
+				message: message,
+				allegato: files
 			}
 		];
 		destinatario = '';
 		oggetto = '';
 		message = '';
+		files = [];
 
 		browser && localStorage.setItem('newEmail', JSON.stringify($newEmails));
 	};
@@ -44,5 +54,11 @@
 	</div>
 	<hr />
 	<textarea class="h-40 w-full p-5 outline-0" bind:value={message} />
+	{#if files}
+		{#each Array.from(files) as file}
+			<p>{file.name} ({file.size}bytes)</p>
+		{/each}
+	{/if}
 	<button type="submit" class="m-5 h-10 w-1/5 rounded-full bg-[#1C73E8]">Invia</button>
+	<input bind:files id="many" multiple type="file" />
 </form>

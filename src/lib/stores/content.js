@@ -4,11 +4,11 @@ import { browser } from '$app/environment';
 
 export let newEmails = writable([]);
 let stored = browser && localStorage.getItem('newEmail');
-console.log('stored', stored);
+// console.log('stored', stored);
 if (!stored) {
 	browser && localStorage.setItem('newEmail', JSON.stringify([]));
 }
-console.log('stored', stored);
+// console.log('stored', stored);
 if (stored !== null && stored.length > 0) {
 	const parsedStored = JSON.parse(stored);
 	// console.log('parsedStored', parsedStored);
