@@ -2,16 +2,24 @@
 	// @ts-nocheck
 
 	export let data;
-	console.log('data', data);
 	let files = data.email.allegato;
 </script>
 
-<p>Destinatario: {data.email.destinatario}</p>
-<h1>Title: {data.email.oggetto}</h1>
-<p>messaggio: {data.email.message}</p>
-{#if files}
-	{#each Array.from(files) as file}
-		<p>Allegato : {file.name} ({file.size}bytes)</p>
-		<img src={file.webkitRelativePath} alt="logo" />
-	{/each}
-{/if}
+<div class="mx-auto flex h-full w-2/3 flex-col justify-between p-5">
+	<div class="flex flex-col gap-10">
+		<h1 class="text-2xl">{data.email.oggetto}</h1>
+		<div class="-mx-24 flex items-center gap-10 text-lg">
+			<div class=" h-12 w-12 rounded-full bg-black" />
+			<p>{data.email.destinatario}</p>
+		</div>
+		<div class="">
+			<p>{data.email.message}</p>
+		</div>
+		<hr />
+		<h1>Allegati:</h1>
+	</div>
+
+	<div class="max-w-xl border">
+		<img src={files} alt="logo" />
+	</div>
+</div>

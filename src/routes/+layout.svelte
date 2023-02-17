@@ -6,7 +6,7 @@
 	import '../app.postcss';
 	import Navbar from '$lib/Navbar.svelte';
 	import Sidebar from '$lib/Sidebar.svelte';
-	import NewMail from '$lib/NewMail.svelte';
+	import WriteEmail from '$lib/WriteEmail.svelte';
 	import LittleSidebar from '$lib/LittleSidebar.svelte';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
@@ -53,7 +53,7 @@
 			<slot />
 		</div>
 		{#if show}
-			<NewMail on:click={handleHide} />
+			<WriteEmail on:click={handleHide} />
 		{/if}
 	</div>
 </div>

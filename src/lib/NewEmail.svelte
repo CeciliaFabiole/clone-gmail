@@ -9,7 +9,7 @@
 	const dispatch = createEventDispatcher();
 
 	export let newEmail = {};
-	console.log('newEmail', newEmail);
+	// console.log('newEmail', newEmail);
 	let now = dayjs(new Date()).format('MMM DD, YYYY hh:mm A');
 	let active = false;
 
@@ -81,5 +81,3 @@
 </div>
 
 <hr />
-
-			

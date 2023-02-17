@@ -11,6 +11,7 @@ export function load({ params }) {
 		message: '',
 		allegato: ''
 	};
+	console.log('email', email);
 
 	// console.log('email', email);
 

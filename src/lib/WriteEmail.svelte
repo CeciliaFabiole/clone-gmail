@@ -4,19 +4,30 @@
 	import { newEmails } from '$lib/stores/content.js';
 	import Icon from './Icon.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
-	import { browser } from '$app/environment';
+
 	let destinatario = '';
 	let oggetto = '';
 	let message = '';
 	let files;
-
-	$: if (files) {
-		console.log('files', files);
-		for (const file of files) {
-			console.log('file', file);
-			console.log('name', `${file.name} : ${file.size} bytes`);
-		}
-	}
+	console.log('files', files);
+	// $: if (files) {
+	// 	console.log('files', files);
+	// 	for (const file of files) {
+	// 		console.log('file', file);
+	// 	}
+	// }
+	const handleImage = (event) => {
+		console.log(event);
+		const image = event.target.files[0];
+		console.log('image', image);
+		const reader = new FileReader();
+		console.log('reader', reader);
+		reader.readAsDataURL(image);
+		reader.addEventListener('load', () => {
+			console.log('reader', reader);
+			files = reader.result;
+		});
+	};
 	const handleSentEmail = () => {
 		$newEmails = [
 			...$newEmails,
@@ -31,9 +42,9 @@
 		destinatario = '';
 		oggetto = '';
 		message = '';
-		files = [];
+		files = '';
 
-		browser && localStorage.setItem('newEmail', JSON.stringify($newEmails));
+		localStorage.setItem('newEmail', JSON.stringify($newEmails));
 	};
 </script>
 
@@ -54,11 +65,6 @@
 	</div>
 	<hr />
 	<textarea class="h-40 w-full p-5 outline-0" bind:value={message} />
-	{#if files}
-		{#each Array.from(files) as file}
-			<p>{file.name} ({file.size}bytes)</p>
-		{/each}
-	{/if}
 	<button type="submit" class="m-5 h-10 w-1/5 rounded-full bg-[#1C73E8]">Invia</button>
-	<input bind:files id="many" multiple type="file" />
+	<input type="file" on:change={handleImage} />
 </form>
